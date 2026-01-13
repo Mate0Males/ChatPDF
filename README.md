@@ -14,8 +14,8 @@ La aplicación utiliza técnicas avanzadas de **Retrieval-Augmented Generation (
 ChromaDB es una base de datos vectorial de código abierto diseñada específicamente para aplicaciones de IA.
 
 **Ventajas:**
-- ⚡ **Configuración cero**: No requiere instalación de servidores ni configuraciones complejas
-- 🚀 **Búsqueda semántica ultrarrápida**: Encuentra información relevante por significado, no solo por palabras clave
+- ⚡ **Configuración Óptima**: No requiere instalación de servidores ni configuraciones complejas
+- 🚀 **Búsqueda semántica**: Encuentra información relevante por significado, no solo por palabras clave
 - 💾 **Eficiente en memoria**: Ideal para prototipos y aplicaciones locales
 - 🔍 **Embeddings nativos**: Soporte integrado para vectores de alta dimensión
 - 🎯 **Resultados precisos**: Recupera los fragmentos de texto más relevantes para cada pregunta
@@ -25,7 +25,7 @@ Gemini es el modelo de lenguaje de última generación de Google, utilizado para
 
 **Ventajas:**
 - 🧠 **Comprensión avanzada**: Entiende contexto complejo y matices del lenguaje
-- 💰 **Capa gratuita generosa**: Perfecto para desarrollo y proyectos pequeños
+- 💰 **Capa gratuita**: Perfecto para desarrollo y proyectos pequeños
 - ⚡ **Respuestas rápidas**: Modelo optimizado para baja latencia
 - 🌍 **Multilingüe**: Soporte excelente para español y otros idiomas
 - 🔒 **Control mediante prompts**: Fácil de configurar para evitar respuestas inventadas
@@ -35,8 +35,7 @@ Streamlit es un framework de Python para crear aplicaciones web de ciencia de da
 
 **Ventajas:**
 - 🐍 **100% Python**: No necesitas HTML, CSS ni JavaScript
-- ⚡ **Desarrollo ultrarrápido**: De idea a aplicación funcional en minutos
-- 🔄 **Recarga automática**: Los cambios se reflejan instantáneamente
+- ⚡ **Desarrollo rápido**: De idea a aplicación funcional en poco tiempo
 - 📱 **Responsive por defecto**: Se adapta a diferentes dispositivos
 - 🎨 **Componentes listos para usar**: File uploaders, botones, spinners y más
 
@@ -86,35 +85,14 @@ Necesitas una clave API de Google Gemini (gratuita):
 ### 1️⃣ Clonar el Repositorio
 
 ```bash
-git clone <URL-de-tu-repositorio>
+git clone https://github.com/bluerzu/chatpdf.git
 cd chatpdf
 ```
-
-O si descargaste el proyecto como ZIP:
-```bash
-cd chatpdf
-```
-
 ---
 
 ### 2️⃣ Crear Entorno Virtual
 
 Es **altamente recomendado** usar un entorno virtual para aislar las dependencias del proyecto.
-
-#### 🪟 **Windows (PowerShell)**
-
-```powershell
-# Crear entorno virtual
-python -m venv .venv
-
-# Activar entorno virtual
-.\.venv\Scripts\Activate.ps1
-```
-
-Si tienes problemas de permisos en PowerShell:
-```powershell
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-```
 
 #### 🪟 **Windows (CMD)**
 
@@ -123,7 +101,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 python -m venv .venv
 
 # Activar entorno virtual
-.venv\Scripts\activate.bat
+.venv\Scripts\activate
 ```
 
 #### 🍎 **macOS / Linux**
@@ -145,7 +123,6 @@ source .venv/bin/activate
 Con el entorno virtual activado:
 
 ```bash
-pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
@@ -163,25 +140,12 @@ pip install -r requirements.txt
 
 Crea un archivo `.env` en la raíz del proyecto:
 
-```bash
-# Windows
-echo GOOGLE_API_KEY=tu_api_key_aqui > .env
-
-# macOS / Linux
-echo "GOOGLE_API_KEY=tu_api_key_aqui" > .env
-```
-
-O créalo manualmente con tu editor favorito:
-
 ```
 GOOGLE_API_KEY=AIzaSyXXXXXXXXXXXXXXXXXXXXXXXXXX
 ```
 
 **⚠️ IMPORTANTE:** 
 - Reemplaza `tu_api_key_aqui` con tu clave real de Gemini
-- **NUNCA** compartas tu `.env` en repositorios públicos
-- Añade `.env` a tu `.gitignore`
-
 ---
 
 ### 5️⃣ Ejecutar la Aplicación
@@ -273,8 +237,8 @@ model = genai.GenerativeModel("models/gemini-2.5-flash-lite")
 ```
 
 Otros modelos disponibles:
-- `gemini-1.5-pro` (más potente)
-- `gemini-1.5-flash` (balance precio-rendimiento)
+- `gemini-3-flash` 
+- `gemini-2.5-flash`
 
 ---
 
@@ -316,13 +280,7 @@ http://localhost:8501
 
 ## 🤝 Contribuciones
 
-Las contribuciones son bienvenidas. Por favor:
-
-1. Haz un Fork del proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
+Las contribuciones son bienvenidas.
 
 ---
 
@@ -332,21 +290,10 @@ Este proyecto está bajo la Licencia MIT. Consulta el archivo `LICENSE` para má
 
 ---
 
-## 👨‍💻 Autor
-
-Desarrollado con ❤️ usando IA y las mejores prácticas de RAG.
-
----
-
 ## 🎯 Próximos Pasos Sugeridos
 
-- [ ] Soporte para múltiples PDFs simultáneos
+- [ ] Soporte para diferentes formatos (.docx, .txt, .html)
 - [ ] Persistencia de la base de datos entre sesiones
-- [ ] Exportar conversaciones en formato markdown
 - [ ] Soporte para documentos escaneados (OCR)
 - [ ] Interfaz multiidioma
 - [ ] Sistema de historial de preguntas
-
----
-
-**¿Preguntas o problemas?** Abre un Issue en el repositorio.
