@@ -1,8 +1,8 @@
-# 📄 Chat PDF con ChromaDB + Gemini + Streamlit
+# 📄 Chat de documentos con ChromaDB + Gemini + Streamlit
 
 ## 📖 Introducción
 
-**Chat PDF** es una aplicación web interactiva que te permite "conversar" con tus documentos PDF. Sube cualquier PDF, haz preguntas en lenguaje natural y obtén respuestas precisas basadas en el contenido del documento. 
+**Chat Documentos** es una aplicación web interactiva que te permite "conversar" con tus documentos. Sube cualquier documento (.pdf, .docx, .txt, .html, .csv y .xlsx.), haz preguntas en lenguaje natural y obtén respuestas precisas basadas en el contenido del documento. 
 
 La aplicación utiliza técnicas avanzadas de **Retrieval-Augmented Generation (RAG)** para proporcionar respuestas contextuales y precisas, eliminando las "alucinaciones" típicas de los modelos de lenguaje al forzarlos a responder únicamente con información presente en el documento.
 
@@ -49,7 +49,7 @@ chatpdf/
 ├── app.py                  # Aplicación principal de Streamlit
 ├── requirements.txt        # Dependencias del proyecto
 ├── .env                    # Variables de entorno (API Keys)
-├── pdfs/                   # Carpeta para documentos de prueba
+├── archivos/                   # Carpeta para documentos de prueba
 └── README.md               # Este archivo
 ```
 
@@ -127,12 +127,15 @@ pip install -r requirements.txt
 ```
 
 **Dependencias principales:**
-- `streamlit` → Framework web
-- `chromadb` → Base de datos vectorial
-- `pypdf` → Extracción de texto de PDFs
-- `sentence-transformers` → Generación de embeddings locales
-- `google-generativeai` → Cliente de Gemini
-- `python-dotenv` → Gestión de variables de entorno
+-streamlit → Framework web para la interfaz de usuario
+-chromadb → Base de datos vectorial para el almacenamiento y búsqueda de fragmentos
+-pypdf → Librería para la extracción de texto de archivos PDF
+-python-docx → Librería para la extracción de texto de archivos Word (.docx)
+-beautifulsoup4 → Librería para procesar y extraer texto de archivos HTML
+-pandas → Manejo y conversión de datos de archivos Excel (.xlsx) y CSV
+-sentence-transformers → Modelo local para convertir texto en vectores numéricos (embeddings)
+-google-generativeai → Cliente oficial para la integración con la IA de Google Gemini
+-python-dotenv → Gestión de variables de entorno para la API Key
 
 ---
 
@@ -165,10 +168,10 @@ http://localhost:8501
 
 ## 📘 Cómo Usar la Aplicación
 
-1. **Sube un PDF** usando el botón de carga
-2. **Procesa el documento** haciendo clic en "📥 Procesar PDF"
+1. **Sube un documento** usando el botón de carga
+2. **Procesa el documento** haciendo clic en "📥 Procesar e Indexar Contenido"
 3. **Espera** mientras el sistema:
-   - Extrae el texto del PDF
+   - Extrae el texto del documento
    - Divide el texto en fragmentos (chunks)
    - Genera embeddings vectoriales
    - Almacena los datos en ChromaDB
@@ -202,12 +205,12 @@ graph LR
 
 ---
 
-## 🔄 Detección de Cambios de PDF
+## 🔄 Detección de Cambios de documentos
 
 La aplicación incluye un sistema inteligente de detección de cambios que evita el reprocesamiento innecesario de documentos:
 
 ### Hash SHA-256
-Cada vez que subes un PDF, la aplicación genera un **hash SHA-256** único del archivo usando la biblioteca `hashlib` de Python. Este hash actúa como una "huella digital" del documento.
+Cada vez que subes un documento, la aplicación genera un **hash SHA-256** único del archivo usando la biblioteca `hashlib` de Python. Este hash actúa como una "huella digital" del documento.
 
 **Cómo funciona:**
 ```python
@@ -216,16 +219,16 @@ def hash_pdf(file) -> str:
 ```
 
 ### Reseteo Automático de Estado
-Si subes un PDF diferente (hash diferente), la aplicación automáticamente:
+Si subes un documento diferente (hash diferente), la aplicación automáticamente:
 - 🗑️ Limpia la colección de ChromaDB anterior
 - 🔄 Resetea el estado de procesamiento
 - 📥 Te permite procesar el nuevo documento
 
 **Beneficios:**
-- ✅ Evita procesamiento duplicado del mismo PDF
+- ✅ Evita procesamiento duplicado del mismo documento
 - ✅ Detecta instantáneamente cambios en el documento
 - ✅ Mejora la eficiencia y experiencia del usuario
-- ✅ Previene errores por mezcla de datos de diferentes PDFs
+- ✅ Previene errores por mezcla de datos de diferentes documentos
 
 ---
 
@@ -282,9 +285,9 @@ pip install -r requirements.txt
 - Revisa que no haya espacios extra en el archivo `.env`
 - Regenera tu API Key en Google AI Studio
 
-### ❌ Error al procesar PDF
-- Asegúrate de que el PDF no esté protegido con contraseña
-- Verifica que el PDF contiene texto (no es solo imágenes escaneadas)
+### ❌ Error al procesar documento
+- Asegúrate de que el documento no esté protegido con contraseña
+- Verifica que el documento contiene texto (no es solo imágenes escaneadas)
 
 ### ❌ La app no se abre en el navegador
 ```bash
